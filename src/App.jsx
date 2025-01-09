@@ -77,7 +77,7 @@ function App() {
 <Route path="/contact" element={<ContactPage />} />
 <Route path="/Reservation" element={<ReservationPage/>} />
 <Route path="/searchpage" element={<SearchnePage />} />
-{/* <Route path="/hometro" element={<HomeTro />} /> */}
+<Route path="/checkout-success" element={<SucessPage />} />
       </Routes>
     </>
   );
