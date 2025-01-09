@@ -43,9 +43,9 @@ export default function Header() {
             Tải Về Phiên Bản App
           </button> */}
           <div className="hostGroup">
-            {/* <button className="hostButton" aria-label="Become a host">
+            <button className="hostButton" aria-label="Become a host">
               Trở Thành Chủ Studio
-            </button> */}
+            </button>
             <div>
               {auth?.user ? (
                 <div className="imageContainer">
