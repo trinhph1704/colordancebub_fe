@@ -12,7 +12,6 @@ export default function Header() {
     localStorage.clear()
     setDropdownVisible(false); // Hide dropdown after logout
   };
-
   return (
     <div id="Header">
       <div className="mainHeader">
