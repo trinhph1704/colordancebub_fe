@@ -87,7 +87,7 @@ const HomeTro = () => {
           <h1 className="title-hometro">Tìm studio, biến tầm nhìn thành hiện thực.</h1>
           <div className="search-bar">
           <div className="image-pop-chua">
-             <img className="image-pop" src="public\black.png"  />
+             <img className="image-pop" src="\black.png"  />
             
             </div>  
            
