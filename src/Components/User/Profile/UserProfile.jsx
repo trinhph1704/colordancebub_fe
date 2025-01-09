@@ -17,6 +17,7 @@ try{
   const data = response.data;
 
   setuser(data);
+  // console.log(user.imageUrl);
 
 
 }
