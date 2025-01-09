@@ -39,13 +39,13 @@ export default function Header() {
         </div>
 
         <div className="actionGroup">
-          <button className="downloadApp" aria-label="Download mobile app">
+          {/* <button className="downloadApp" aria-label="Download mobile app">
             Tải Về Phiên Bản App
-          </button>
+          </button> */}
           <div className="hostGroup">
-            <button className="hostButton" aria-label="Become a host">
+            {/* <button className="hostButton" aria-label="Become a host">
               Trở Thành Chủ Studio
-            </button>
+            </button> */}
             <div>
               {auth?.user ? (
                 <div className="imageContainer">
