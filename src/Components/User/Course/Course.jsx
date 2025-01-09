@@ -39,7 +39,8 @@ const reviews = [
 ];
 
 export const Course = () => {
-  const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null); 
+  const [isGroupOpened, setIsGroupOpened] = useState(false);
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [user, setUser] = useState(null);
@@ -49,6 +50,7 @@ export const Course = () => {
   const [classBooking, setclassBooking] = useState([]);
   const [orderId, setOrderId] = useState('');
   const [role, setRole] = useState([]);
+  const [images, setImages] = useState([]);
   const navigate = useNavigate();
   const { auth } = useAuth();
     const { studioId } = useParams();
@@ -105,6 +107,19 @@ useEffect(() => {
           setClass(userClasses);
           setClassId(classDetails);
           setUser(userDetails);
+
+          const studioImages = [
+            studiosOfUser[0].image?.imageUrl1 && { src: studiosOfUser[0].image.imageUrl1, name: "Hình 1" },
+            studiosOfUser[0].image?.imageUrl2 && { src: studiosOfUser[0].image.imageUrl2, name: "Hình 2" },
+            studiosOfUser[0].image?.imageUrl3 && { src: studiosOfUser[0].image.imageUrl3, name: "Hình 3" },
+            studiosOfUser[0].image?.imageUrl4 && { src: studiosOfUser[0].image.imageUrl4, name: "Hình 4" },
+            {src:"/ee53ddddc8801eaa90470f5c25934df9.jpg", name:"Hình 5"},
+            {src:"/ee53ddddc8801eaa90470f5c25934df9.jpg", name:"Hình 6"},
+            {src:"/ee53ddddc8801eaa90470f5c25934df9.jpg", name:"Hình 7"},
+            {src:"/ee53ddddc8801eaa90470f5c25934df9.jpg", name:"Hình 8"},
+          ].filter(Boolean); 
+          setImages(studioImages); // Cập nhật images
+          console.log("Images:",images)
         }
       }
     } catch (error) {
@@ -269,6 +284,9 @@ const createPaymentLink = async () => {
 
 createPaymentLink();
 }, [orderId]);
+const closeModal = () => {
+  setSelectedImage(null);
+};
 
 
   return (
@@ -277,18 +295,7 @@ createPaymentLink();
       {/* <StudioHeader /> */}
       
       <div className="mainContent">
-        <section className="galleryContainer" aria-label="Studio gallery">
-          <div className="mainImageContainer">
-            <img
-              src={galleryImages[selectedImage].src}
-              alt={galleryImages[selectedImage].alt}
-              className="mainImage"
-              loading="lazy"
-            />
-            {/* <div className="priceOverlay">
-              <span className="price">From 100$/hr</span>
-            </div> */}
-            <div className="hostInfo">
+      <div className="hostInfo">
               <img
                 src="https://chiemtaimobile.vn/images/companies/1/%E1%BA%A2nh%20Blog/avatar-facebook-dep/Anh-dai-dien-ngau-chat-cho-con-trai-hut-thuoc.jpg?1704788544123"
                 alt="Host Valentino Jr"
@@ -303,37 +310,82 @@ createPaymentLink();
                 {/* <span className="priceRange">For: $ 1000 - $ 5000</span> */}
               </div>
             </div>
-          </div>
+      <div className="image-gallery">
+        
+        <div className="image-main">
+          <img
+            src={studio.imageStudio}
+            alt=""
+            className="main-img"
+            onClick={() => setSelectedImage(studio.imageStudio)}
+          />
+       
+        </div>
 
-          <div className="thumbnailGrid" role="list">
-            {galleryImages.map((image, index) => (
-              <div 
-                key={image.id}
-                className={`thumbnail ${selectedImage === index ? 'selected' : ''}`}
-                role="listitem"
-                tabIndex={0}
-                onClick={() => handleImageSelect(index)}
-                onKeyDown={(e) => handleKeyPress(e, index)}
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  loading="lazy"
-                  className="thumbnailImage"
-                />
-                {index === 3 && (
-                  <div className="moreOverlay">
-                    <span className="moreCount">+2</span>
-                    <div className="moreText">
-                      <span>Hình Ảnh</span>
-                      {/* <span>Photos</span> */}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
+  
+        <div className="image-thumbnails">
+          {images.slice(1, -2).map((img, index) => (
+            <div key={index} className="image-item">
+              <img
+                src={img.src}
+                alt={img.name}
+                className="gallery-img"
+                onClick={() => setSelectedImage(img.src)}
+              />
+              
+            </div>
+          ))}
+
+      
+<div className="grouped-images" onClick={() => setIsGroupOpened(!isGroupOpened)}>
+  {!isGroupOpened ? (
+    <div className="grouped-images-placeholder">
+    
+      <div className="image-with-overlay">
+        <img
+         src={images[5]?.src} 
+         
+          className="gallery-img"
+        />
+       
+        <div className="overlay-text">
+          +{images.length - 6} more
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className="grouped-images-expanded">
+      {images.slice(-2).map((img, index) => (
+        <div key={index} className="image-item">
+          <img
+            src={img.src}
+            alt={img.name}
+            className="gallery-img"
+            onClick={() => setSelectedImage(img.src)}
+          />
+          
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
+
+        </div>
+        
+      </div>
+
+     
+      {selectedImage && (
+        <div className="modal" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <span className="close-button" onClick={closeModal}>
+              &times;
+            </span>
+            <img src={selectedImage} alt="Selected" className="modal-image" />
           </div>
-        </section>
+        </div>
+      )}
         
         <div className="contentGrid">
           <div className="leftColumn">
