@@ -23,6 +23,9 @@
   width: 62px;
   border-radius: 500px;
   flex-shrink: 0;
+  border: 2px solid white;
+  /* border-radius: 50%; */
+  animation: fadeInLeft 2s ease-in-out;
 }
 
 #Header .navigation {
