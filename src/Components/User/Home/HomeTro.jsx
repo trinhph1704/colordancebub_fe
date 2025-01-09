@@ -87,7 +87,7 @@ const HomeTro = () => {
           <h1 className="title-hometro">Tìm studio, biến tầm nhìn thành hiện thực.</h1>
           <div className="search-bar">
           <div className="image-pop-chua">
-             <img className="image-pop" src="public\black.png"  />
+             <img className="image-pop" src="https://didongviet.vn/dchannel/wp-content/uploads/2023/08/hinh-nen-3d-hinh-nen-iphone-dep-3d-didongviet@2x-576x1024.jpg"  />
             
             </div>  
            
