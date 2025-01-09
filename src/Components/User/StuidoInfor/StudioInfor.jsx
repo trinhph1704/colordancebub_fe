@@ -20,9 +20,9 @@ const StudioInfor = () => {
   const [selectedImage, setSelectedImage] = useState(null); 
   const [isGroupOpened, setIsGroupOpened] = useState(false); 
   const [studio, setstudio] = useState([]);
-  const [stardate, setstardate] = useState(dayjs());
-  const [checkin, setcheckin] = useState(dayjs());
-  const [checkout, setcheckout] = useState(dayjs());
+  const [stardate, setstardate] = useState(dayjs("2025-01-01T09:00"));
+const [checkin, setcheckin] = useState(dayjs("2025-01-02T10:00"));
+const [checkout, setcheckout] = useState(dayjs("2025-01-02T18:00"));
   const [review, setreview] = useState([]);
   const { id } = useParams();
   const { auth } = useAuth();
@@ -316,7 +316,7 @@ const StudioInfor = () => {
             <div className="start-Date">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer  components={['DatePicker']}>
-        <DatePicker value={stardate} onChange={(e)=>setstardate(e.target.value)} label="Ngày bắt đầu" />
+        <DatePicker value={stardate} onChange={(newValue)=>setstardate(newValue)} label="Ngày bắt đầu" />
       </DemoContainer>
     </LocalizationProvider>
     </div>
@@ -324,12 +324,22 @@ const StudioInfor = () => {
 <div className="timechua">  
 <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer    components={['TimePicker']}>
-        <TimePicker className="starttime" value={checkin} onChange={(e)=> setcheckin(e.target.value)} label="Thời gian bắt đầu" />
+      <TimePicker
+       id="time"
+  value={checkin}
+  onChange={(newValue) => setcheckin(newValue)}
+  label="Thời gian bắt đầu"
+/>
       </DemoContainer>
     </LocalizationProvider>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer  components={['TimePicker']}>
-        <TimePicker id="time" className="endtime" value={checkout} onChange={(e)=> setcheckout(e.target.value)} label="Thời gian kết thúc" />
+      <TimePicker
+      id="time"
+  value={checkout}
+  onChange={(newValue) => setcheckout(newValue)}
+  label="Thời gian kết thúc"
+/>
       </DemoContainer>
     </LocalizationProvider>
 
@@ -348,7 +358,7 @@ const StudioInfor = () => {
         aria-label="Book this dance class"
       
       >
-        Mua Khóa Học
+         Đặt Studio
       </button>
            </div>
            
@@ -357,8 +367,6 @@ const StudioInfor = () => {
         </div>
       
       </div>
-
-      {/* Danh sách tiện ích */}
       <div className="amenities-section">
   <h2 className="amen-title">Tiện nghi được cung cấp</h2>
   <ul className="amenities-list">
@@ -393,16 +401,22 @@ const StudioInfor = () => {
           <div
             className="review"
             key={index}
-            onClick={() => handleNavigate(reviews.userName)}
+            onClick={() => handleNavigate(reviews.accountId)}
             style={{ cursor: "pointer" }}
           >
             <div>
-              <img src={reviews.img} alt="" className="hinh-reviewer" />
+              <img src={reviews.account.imageUrl} alt="" className="hinh-reviewer" />
             </div>
             <div>
-              <strong>{reviews.accountId}</strong>
+              <strong>{reviews.account.userName}</strong>
               <p>{reviews.reviewMessage}</p>
-              <p className="reviewdate">({reviews.reviewDate})</p>
+              <p className="reviewdate">
+  ({new Date(reviews.reviewDate).toLocaleDateString('vi-VN', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  })})
+</p>
             </div>
           </div>
         ))}

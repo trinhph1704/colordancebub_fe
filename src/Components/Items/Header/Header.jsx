@@ -61,29 +61,24 @@ export default function Header() {
                   {dropdownVisible && (
                     <div
                       className="dropdownMenu"
-                      style={{
-                        position: 'absolute',
-                        top: '100%',
-                        right: 0,
-                        background: 'white',
-                        border: '1px solid #ccc',
-                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                        padding: '10px',
-                        zIndex: 1000,
-                      }}
+                     
                     >
-                      <button
-                        onClick={handleLogout}
-                        style={{
-                          background: 'none',
-                          border: 'none',
-                          padding: '10px',
-                          cursor: 'pointer',
-                          fontSize: '16px',
-                          color: '#333',
-                        }}
+
+                      <button className="logout-button"
+                        
                       >
-                        Log Out
+                         <a href="/Reservation" >Lịch Sử</a>
+                      </button>
+                      <button className="logout-button"
+                        
+                      >
+                        <a href={`/Profile/${auth.user.id}`}>Tài Khoản</a>
+
+                      </button>
+                      <button className="logout-button"
+                        onClick={handleLogout} 
+                      >
+                        Đăng Xuất
                       </button>
                     </div>
                   )}

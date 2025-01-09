@@ -165,7 +165,7 @@
 
 #StudioInfor .rate-review {
   color: black;
-  margin-top: 5.5vh;
+  margin-top: 4vh;
   margin-left: 6px;
 }
 
@@ -269,6 +269,7 @@
   margin-left: 7vh;
   background-color: #9747FF;
   color: white;
+  font-weight: bold;
   border: 2px solid black;
 }
 

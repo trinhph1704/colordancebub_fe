@@ -1,11 +1,12 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../../utils/requestAPI';
 import './OrderPage.css';
 
 const OrderPage = () => {
-    const { BookingId } = useParams();
-    const [orderId, setOrderId] = useState("");
+    const { Bookingid } = useParams();
+    const [orderId, setOrderId] = useState('');
+    const [Order, SetOrder] = useState([]);
     const [studios] = useState([
         {
             id: 1,
@@ -18,37 +19,51 @@ const OrderPage = () => {
             time: '11:00 - 13:00',
         },
     ]);
-
+    useEffect (() => {
+      const fetchOrder = async () => {
+        const url = `https://cldhbe.azurewebsites.net/Get-Booking-By-BookingiD?bookingid=${Bookingid}`;
+        try {
+          const response = await api.get(url);
+          
+          console.log('API response:', response.data);
+          SetOrder(response.data);
+        } catch (error) {
+          console.error('Error fetching course data:', error);
+        }
+      };
+  
+     
+      fetchOrder();
+    }, []);
+    // Tạo Order
     useEffect(() => {
-        // Theo dõi sự thay đổi của `BookingId`
         const createOrderAndPayment = async () => {
-          if (BookingId) {
-            try {
-              // Tạo Order mới
-              const createOrder = await api.post(
-                `/Create-New-Order?BookingId=${BookingId}`
-              );
-        
-              if (createOrder.status === 200 && createOrder.data) {
-                const orderId1 = createOrder.data.id;
-                setOrderId(orderId1);
-                // alert('Create Booking Success!');
-          // navigate(`/order/${createOrder.data.id}`);
-                console.log("Order created successfully, ID:", orderId1);
-    
-                // setOrderId({ id: orderId }); 
-              } else {
-                console.error("Order creation failed or response is missing 'id'.", createOrder);
-              }
-            } catch (error) {
-              console.error("Error creating order:", error);
+            if (Bookingid) {
+                try {
+                    const createOrder = await api.post(
+                        `/Create-New-Order?BookingId=${Bookingid}`
+                    );
+
+                    if (createOrder.status === 200 && createOrder.data) {
+                        const orderId1 = createOrder.data.id;
+                        setOrderId(orderId1);
+                        console.log('Order created successfully, ID:', orderId1);
+                    } else {
+                        console.error(
+                            "Order creation failed or response is missing 'id'.",
+                            createOrder
+                        );
+                    }
+                } catch (error) {
+                    console.error('Error creating order:', error);
+                }
             }
-          }
         };
-        
+
         createOrderAndPayment();
-        }, [BookingId]);
-        useEffect(() => {
+    }, [Bookingid]);
+
+    // Tạo payment link
     const createPaymentLink = async () => {
         if (orderId) {
             try {
@@ -77,9 +92,6 @@ const OrderPage = () => {
             console.warn('Order ID is missing. Cannot create payment link.');
         }
     };
-    
-createPaymentLink();
-}, [orderId]);
 
     return (
         <div id="OrderPage">
@@ -88,14 +100,19 @@ createPaymentLink();
                     {studios.map((studio) => (
                         <div className="infoorderstu-item" key={studio.id}>
                             <div className="imageorder-stu">
-                                <img src={studio.image} alt={studio.title} className="imageorder-con" />
+                                <img
+                                    src={Order.imageStudio}
+                                    alt={studio.title}
+                                    className="imageorder-con"
+                                />
                             </div>
 
                             <div className="stu-infoorder">
                                 <div className="inforordercon">
                                     <div className="chuavuine">
                                         <span className="nameofstu">
-                                            <strong>Name Studio:</strong> {studio.title}
+                                            <strong>Name Studio:</strong>{' '}
+                                            {Order.studioName}
                                         </span>
                                     </div>
                                     <div className="chuavuine">
@@ -105,17 +122,18 @@ createPaymentLink();
                                     </div>
                                     <div className="chuavuine">
                                         <span className="Addressofstu">
-                                            <strong>Address:</strong> {studio.address}
+                                            <strong>Address:</strong>{' '}
+                                            {Order.studioAddress}
                                         </span>
                                     </div>
                                     <div className="chuavuine">
                                         <span className="Timeofstu">
-                                            <strong>Time:</strong> {studio.time}
+                                            <strong>Time:</strong> {Order.checkIn}-{Order.checkOut}
                                         </span>
                                     </div>
                                     <div className="chuavuine">
                                         <span className="Dateorderstu">
-                                            <strong>Date:</strong> {studio.date}
+                                            <strong>Date:</strong> {Order.bookingDate}
                                         </span>
                                     </div>
                                 </div>
@@ -134,22 +152,26 @@ createPaymentLink();
 
                         <div className="chuainfovui">
                             <span className="customername">Name:</span>
-                            <span className="kovui">Nguyen Van A</span>
+                            <span className="kovui">{Order.userName}</span>
                         </div>
 
                         <div className="chuainfovui">
-                            <span className="Priceorder">Price for one hour:</span>
-                            <span className="kovui">1500000</span>
+                            <span className="Priceorder">
+                                Price for one hour:
+                            </span>
+                            <span className="kovui">2000</span>
                         </div>
 
-                        <div className="chuainfovui">
+                        {/* <div className="chuainfovui">
                             <span className="quantityhour">Quantity Hour:</span>
                             <span className="kovui">2</span>
-                        </div>
+                        </div> */}
 
                         <div className="chuainfovui">
-                            <span className="totalpricevui">Total Payment:</span>
-                            <span className="kovui">3000000</span>
+                            <span className="totalpricevui">
+                                Total Payment:
+                            </span>
+                            <span className="kovui">{Order.totalPrice}</span>
                         </div>
                     </div>
 

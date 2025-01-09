@@ -76,32 +76,32 @@ const Footer = () => {
 
         {/* Middle Sections */}
         <div className="footer-section">
-          <h3 className="footer-title">COMPANY</h3>
+          <h3 className="footer-title">CÔNG TY</h3>
           <ul>
-            <li>About Us</li>
-            <li>Legal Information</li>
-            <li>Contact us</li>
+            <li>Về chúng tôi</li>
+            <li>Thông tin pháp lý</li>
+            <li>Liên hệ với chúng tôi</li>
             <li>Blogs</li>
           </ul>
         </div>
         <div className="footer-section">
-          <h3 className="footer-title">HELP CENTER</h3>
+          <h3 className="footer-title">TRUNG TÂM TRỢ GIÚP</h3>
           <ul>
-            <li>Find a Property</li>
-            <li>How To Host?</li>
-            <li>Why Us?</li>
-            <li>FAQs</li>
-            <li>Rental Guides</li>
+            {/* <li>Find a Property</li> */}
+            <li>Làm thế nào để tổ chức?</li>
+            <li>Tại sao lại là chúng tôi?</li>
+            <li>Câu Hỏi Thường Gặp</li>
+            <li>Hướng dẫn cho thuê</li>
           </ul>
         </div>
 
         {/* Right Section */}
         <div className="footer-section">
-          <h3 className="footer-title">CONTACT INFO</h3>
+          <h3 className="footer-title">THÔNG TIN LIÊN HỆ</h3>
           <div className="contact-chua"> 
-            <p>Phone: 1234567890</p>
+            <p>Điện thoại: 1234567890</p>
             <p>Email: company@email.com</p>
-            <p>Location: 100 Smart Street, LA, USA</p>
+            <p>Địa chỉ: 100 Smart Street, LA, USA</p>
           </div>
           <div className="social-icons">
             <FaFacebook style={{ color: "#1877F2", fontSize: "24px", marginLeft: "10px", marginTop:"5px" }} />

@@ -51,7 +51,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
 
         {/* Trang thông tin người dùng */}
-        <Route path="/Profile" element={<ProfilePage />} />
+        <Route path="/Profile/:accountid" element={<ProfilePage />} />
 
         {/* Trang Giỏ Hàng */}
         <Route path="/Cart" element={<CartPage />} />
@@ -67,7 +67,7 @@ function App() {
         <Route path="/StudioInfor/:id" element={<StudioInforPage />} />
 
         
-<Route path="/order/:orderId" element={<OrderPage1 />} />
+        <Route path="/order/:Bookingid" element={<OrderPage1 />} />
 <Route path="/bookingmanager" element={<StudioBookingManagerPage />} />
 <Route path="/editstu" element={<EditStudioPage />} />
 <Route path="/adminmanager" element={<AdminManagerPage />} />
