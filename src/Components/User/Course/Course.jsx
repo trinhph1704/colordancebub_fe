@@ -194,7 +194,7 @@ try {
     bookingDate: getTodayDate(),
     checkIn: "String",
     checkOut: "String",
-    totalPrice: "500",
+    totalPrice: ClassId.pricing,
   };
 
   // Tạo Booking mới
