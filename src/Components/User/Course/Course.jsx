@@ -18,25 +18,26 @@ const reviews = [
   {
     id: 1,
     avatar: "https://www.elle.vn/app/uploads/2022/08/15/491817/co-gai-moc-mac-trong-hinh-nen-dien-thoai-scaled.jpg",
-    name: "Mr Trịnh",
-    date: "Mar 12 2020",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    name: "Ông Trịnh",
+    date: "12 Tháng 3 2020",
+    text: "Khóa học rất bổ ích"
   },
   {
     id: 2,
     avatar: "https://www.elle.vn/app/uploads/2022/08/15/491817/co-gai-moc-mac-trong-hinh-nen-dien-thoai-scaled.jpg",
-    name: "J97",
-    date: "Mar 12 2020",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    name: "Nguyễn Thị Ngọc",
+    date: "12 Tháng 3 2020",
+    text: "Giáo viên rất tận tâm"
   },
   {
     id: 3,
     avatar: "https://www.elle.vn/app/uploads/2022/08/15/491817/co-gai-moc-mac-trong-hinh-nen-dien-thoai-scaled.jpg",
     name: "Trịnh Trần Phương Tuấn",
-    date: "Mar 12 2020",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    date: "12 Tháng 3 2020",
+    text: "Qúa tuyệt vời"
   }
 ];
+
 
 export const Course = () => {
   const [selectedImage, setSelectedImage] = useState(null); 
@@ -51,6 +52,7 @@ export const Course = () => {
   const [orderId, setOrderId] = useState('');
   const [role, setRole] = useState([]);
   const [images, setImages] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth();
     const { studioId } = useParams();
@@ -58,6 +60,16 @@ export const Course = () => {
   const handleImageSelect = (index) => {
     setSelectedImage(index);
   };
+  const formatPrice = (price) => {
+    if (typeof price !== "number" || isNaN(price)) {
+        return "0 VNĐ"; // Giá trị mặc định nếu `price` không hợp lệ
+    }
+    return `${price.toLocaleString()} VNĐ`;
+};
+// Hàm xử lý khi bấm vào nút
+const handleButtonClick = () => {
+  setIsLiked(!isLiked); // Đảo trạng thái
+};
 
   const handleKeyPress = (event, index) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -288,6 +300,18 @@ const closeModal = () => {
   setSelectedImage(null);
 };
 
+const handleShareClick = async () => {
+  try {
+    const currentUrl = window.location.href; // Lấy đường dẫn hiện tại
+    await navigator.clipboard.writeText(currentUrl); // Sao chép vào clipboard
+    window.alert('Đã sao chép đường dẫn của Studio!'); // Cập nhật thông báo
+    
+  } catch (error) {
+    window.alert("Sao chép thất bại, vui lòng thử lại.");
+    console.error("Error copying link:", error);
+  }
+};
+
 
   return (
     <div id="Course">
@@ -396,16 +420,29 @@ const closeModal = () => {
               <p className="teacherName">Nguyễn Việt Anh</p>
               </div>
               <div className="actionButtons">
-  <button className="actionIcon" tabIndex="0">
-    <img
-      loading="lazy"
-      src="https://cdn.builder.io/api/v1/image/assets/TEMP/11ec6460177dcabcb2bed7c443e2c9330b46ad24af935eb07fe2d8c5f552402b?placeholderIfAbsent=true&apiKey=c05fb6b607a34c3cab6bc37bd3664ed7"
-      alt="Action button"
+              <button
       className="actionIcon"
-    />
-    <span className="visually-hidden">Perform action</span>
-  </button>
-  <button className="shareIcon" tabIndex="0">
+      tabIndex="0"
+      onClick={handleButtonClick} // Gọi hàm khi bấm
+      // style={{ border: "none", background: "none", cursor: "pointer" }}
+    >
+      <img
+  loading="lazy"
+  src={isLiked ? "https://i.imgur.com/1ApLOZv.png"  : "https://cdn.builder.io/api/v1/image/assets/TEMP/11ec6460177dcabcb2bed7c443e2c9330b46ad24af935eb07fe2d8c5f552402b?placeholderIfAbsent=true&apiKey=c05fb6b607a34c3cab6bc37bd3664ed7"}
+  alt="Action button"
+  // style={{
+  //   maxWidth: "100%", // Đảm bảo ảnh không vượt quá kích thước nút
+  //         maxHeight: "100%",
+  //         position: "absolute", // Tách ảnh khỏi bố cục cha
+  //         top: "50%", // Căn giữa dọc
+  //         left: "50%", // Căn giữa ngang
+  //         transform: "translate(-50%, -50%)", // Dịch ảnh về chính giữa
+  // }}
+  // className="actionIcon"
+/>
+      <span className="visually-hidden">Perform action</span>
+    </button>
+  <button className="shareIcon" tabIndex="0" onClick={handleShareClick}>
     <img
       loading="lazy"
       src="https://cdn.builder.io/api/v1/image/assets/TEMP/07371e2ba2b94190780c47c86259b57d63466e5fc5d5c16bf302e31d95ffac3f?placeholderIfAbsent=true&apiKey=c05fb6b607a34c3cab6bc37bd3664ed7"
@@ -488,12 +525,12 @@ const closeModal = () => {
       <div className="feeContainer">
         <div className="courseFee">Chi Phí Khóa Học</div>
         {/* <div className="priceTag">$500</div> */}
-        <div className="priceTag">{ClassId.pricing} VND</div>
+        <div className="priceTag">{formatPrice(ClassId.pricing)}</div>
       </div>
       
       <div className="detailsContainer">
         <div className="leftColumn">
-          <div>{ClassId.timeStart}A-{ClassId.timeEnd}A</div>
+          <div>{ClassId.timeStart} - {ClassId.timeEnd}</div>
           <div className="skillLevel">Trình Độ</div>
           <div className="classDay">Ngày Học</div>
           <div className="danceStyle">Phong Cách</div>
@@ -503,7 +540,7 @@ const closeModal = () => {
             <div className="startDate">{ClassId.dateStart}</div>
             <div className="basic">Cơ Bản</div>
           </div>
-          <div className="schedule">Thứ Hai - Thứ Sáu</div>
+          <div className="schedule">{ClassId.dateOfWeek}</div>
           <div className="hiphop">Hiphop</div>
         </div>
       </div>

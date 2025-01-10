@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './Header.css';
 import useAuth from '../../../hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Header() {
   const { auth, setAuth } = useAuth();
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const location = useLocation();
 
   const handleLogout = () => {
     setAuth({ user: null }); // Clear user data
@@ -27,13 +28,27 @@ export default function Header() {
             />
           </a>
           <nav className="navigation" aria-label="Main navigation">
-            <button className="navItem"><a href="/Home" >TRANG CHỦ</a></button>
-            <button className="navItem">THUÊ PHÒNG TẬP NHẢY</button>
-            <button className="navItem"><a href="/Course" >LỚP NHẢY</a></button>         
-            <button className="navItem"><a href="/Contact" >LIÊN HỆ</a></button>
-            {/* <button className="navItem">TIN TỨC</button>
-            <button className="navItem">LIÊN HỆ</button> */}
-          </nav>
+      <button 
+        className={`navItem ${location.pathname === '/Home' ? 'active' : ''}`}
+      >
+        <a href="/Home">TRANG CHỦ</a>
+      </button>
+      <button 
+        className={`navItem ${location.pathname === '/Rental' ? 'active' : ''}`}
+      >
+        THUÊ PHÒNG TẬP NHẢY
+      </button>
+      <button 
+        className={`navItem ${location.pathname === '/Course' ? 'active' : ''}`}
+      >
+        <a href="/Course">LỚP NHẢY</a>
+      </button>         
+      <button 
+        className={`navItem ${location.pathname === '/Contact' ? 'active' : ''}`}
+      >
+        <a href="/Contact">LIÊN HỆ</a>
+      </button>
+    </nav>
         </div>
 
         <div className="actionGroup">

@@ -295,3 +295,8 @@ flex-direction: column; /* Đặt các phần tử con theo chiều dọc */
 gap: 10px; /* Thêm khoảng cách giữa các phần tử (tùy chọn) */
 
 }
+
+#Header .navItem.active a {
+  color: rgba(151, 71, 255, 1);
+  
+}
