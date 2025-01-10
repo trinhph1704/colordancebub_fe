@@ -36,10 +36,10 @@ const Contact = () => {
                       </div>
                       <div className="media-body">
                         <h4 className="contact-info_title">
-                          Our Office Address
+                        Địa chỉ văn phòng của chúng tôi
                         </h4>
                         <span className="contact-info_text e-text">
-                          835 Middle Country Rd, Selden, NY 11784, United States
+                          Vinhomes Grand Park
                         </span>
                       </div>
                     </div>
@@ -51,7 +51,7 @@ const Contact = () => {
                       </div>
                       <div className="media-body">
                         <h4 className="contact-info_title">
-                          Telephone Number:
+                        Số điện thoại
                         </h4>
                         <span className="contact-info_text  e-text">
                           <a href="tel:+16312020088">(+163)-1202-0088</a>
@@ -66,10 +66,10 @@ const Contact = () => {
                         <i className="fa-regular fa-clock" />{" "}
                       </div>
                       <div className="media-body">
-                        <h4 className="contact-info_title">Work Time:</h4>
+                        <h4 className="contact-info_title">Thời gian làm việc</h4>
                         <span className="contact-info_text e-text">
-                          9:00am - 6:00pm ( Monday - Friday ) Saturday &amp;
-                          Sunday Half Day
+                          9:00am - 6:00pm ( Thứ 2 - Thứ 6 ) Thứ 7 &amp;
+                          Chủ nhật làm tới 12h
                         </span>
                       </div>
                     </div>
@@ -163,11 +163,10 @@ const Contact = () => {
                     >
                       <div className="elementor-widget-container">
                         <div className="title-area">
-                          <span className="sub-title style1">Get In Touch</span>
-                          <h2 className="sec-title">Let’s Talk To An Expert</h2>
+                          {/* <span className="sub-title style1">Liên hệ</span> */}
+                          <h2 className="sec-title">Hãy nói chuyện với một chuyên gia</h2>
                           <p className="sec-desc">
-                            Efficiently integrate wireless value whereas
-                            cross-platform e-tailers.
+                          Giúp bạn khai thác tiềm năng và nâng tầm bản thân
                           </p>{" "}
                         </div>
                       </div>
@@ -248,7 +247,7 @@ const Contact = () => {
                                       id="name2"
                                       aria-required="true"
                                       aria-invalid="false"
-                                      placeholder="Your Name"
+                                      placeholder="Tên của bạn"
                                       defaultValue=""
                                       type="text"
                                       name="name2"
@@ -268,7 +267,7 @@ const Contact = () => {
                                       id="email2"
                                       aria-required="true"
                                       aria-invalid="false"
-                                      placeholder="Your Email"
+                                      placeholder="Email của bạn"
                                       defaultValue=""
                                       type="email"
                                       name="email2"
@@ -286,7 +285,7 @@ const Contact = () => {
                                       id="number-767"
                                       aria-required="true"
                                       aria-invalid="false"
-                                      placeholder="Phone Number"
+                                      placeholder="Số điện thoại"
                                       defaultValue=""
                                       type="number"
                                       name="number-767"
@@ -335,7 +334,7 @@ const Contact = () => {
                                       id="textarea-445"
                                       aria-required="true"
                                       aria-invalid="false"
-                                      placeholder="Your Message"
+                                      placeholder="Tin nhắn của bạn"
                                       name="textarea-445"
                                       defaultValue={""}
                                     />
@@ -344,7 +343,7 @@ const Contact = () => {
                                 </div>
                                 <div className="contact-form-btn col-12">
                                   <button className="th-btn blue-btn">
-                                    Send Message
+                                  Gửi tin nhắn
                                   </button>
                                 </div>
                               </div>
