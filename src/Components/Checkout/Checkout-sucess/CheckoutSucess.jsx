@@ -10,24 +10,24 @@ const CheckoutSucess = () => {
 
   const getQueryparams = () => {
     const query = new URLSearchParams(location.search);
-    const status1 = query.get("status");
+    // const status1 = query.get("status");
     const trancode = query.get("orderCode");
-    return { status1,trancode  };
+    return { trancode  };
   };
 
-  const [status1, setStatus1] = useState(null);
+  // const [status1, setStatus1] = useState(null);
   const [trancode, settrancode] = useState(null);
 
   useEffect(() => {
-    const { status1 } = getQueryparams();
+    // const { status1 } = getQueryparams();
     const {trancode} = getQueryparams();
     settrancode(trancode)
-    setStatus1(status1);
+    // setStatus1(status1);
 
-    if (trancode && status1) {
+    if (trancode) {
       const fetchCancel = async () => {
        
-        const url = `/create-payment-link/update-status?odercode=${trancode}&status=${status1}`;
+        const url = `https://cldhbe.azurewebsites.net/create-payment-link/update-status-2?odercode=${trancode}`;
         console.log('URL being called:', url);
 
         try {
