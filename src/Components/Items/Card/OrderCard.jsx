@@ -72,10 +72,8 @@ const OrderCard = ({ order }) => {
         {/* Status */}
         <Typography variant="body2" color="textSecondary" component="p">
           <strong>Status:</strong>{" "}
-          <span
-            style={{ color: order.status === "True" ? "green" : "red" }}
-          >
-            {order.status || "N/A"}
+          <span style={{ color: order.status ? "green" : "red" }}>
+            {order.status ? "Success" : "N/A"}
           </span>
         </Typography>
       </CardContent>
