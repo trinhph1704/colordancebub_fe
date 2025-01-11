@@ -12,6 +12,7 @@ export default function Header() {
     setAuth({ user: null }); // Clear user data
     localStorage.clear()
     setDropdownVisible(false); // Hide dropdown after logout
+    
   };
   return (
     <div id="Header">
@@ -40,8 +41,13 @@ export default function Header() {
       </button>
       <button 
         className={`navItem ${location.pathname === '/Course' ? 'active' : ''}`}
+        
       >
         <a href="/Course">LỚP NHẢY</a>
+        <div className="dropdown">
+    <a href="/Course">Course 1</a>
+    <a href="/Course2">Course 2</a>
+  </div>
       </button>         
       <button 
         className={`navItem ${location.pathname === '/Contact' ? 'active' : ''}`}
