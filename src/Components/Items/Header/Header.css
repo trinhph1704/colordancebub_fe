@@ -1,3 +1,7 @@
+#Header {
+  position: relative; /* Đảm bảo vị trí của Header là gốc tham chiếu */
+  z-index: 1000;
+}
 #Header .mainHeader {
   background-color: #000000;
   display: flex;
@@ -44,10 +48,12 @@
   cursor: pointer;
   padding: 8px 16px;
   transition: opacity 0.2s ease;
+  position: relative; /* Định vị tương đối để làm gốc cho dropdown */
+  display: inline-block; /* Đặt các nút liên tiếp nhau */
 }
 
 #Header .navItem:hover {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 #Header .navItem:focus-visible {
@@ -299,4 +305,34 @@ gap: 10px; /* Thêm khoảng cách giữa các phần tử (tùy chọn) */
 #Header .navItem.active a {
   color: rgba(151, 71, 255, 1);
   
+}
+#Header .navItem .dropdown {
+  display: none; /* Ẩn menu xổ xuống mặc định */
+  position: absolute; /* Định vị tuyệt đối theo navItem */
+  top: 100%; /* Hiển thị ngay dưới nút "LỚP NHẢY" */
+  left: 0; /* Căn trái dropdown với nút */
+  background-color: rgb(255, 255, 255);
+  /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+  padding: 8px 0;
+  border-radius: 4px;
+  min-width: 150px; /* Đảm bảo kích thước menu đủ rộng */
+  z-index: 2000; 
+  border: 1px solid #000000;
+  opacity: 1; /* Đảm bảo menu không bị mờ */
+  filter: none; /* Loại bỏ hiệu ứng mờ */
+}
+#Header .navItem .dropdown a {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  white-space: nowrap; /* Đảm bảo không bị xuống dòng */
+}
+#Header .navItem .dropdown a:hover {
+  background-color: rgba(151, 71, 255, 1);
+  color: white;
+}
+
+#Header .navItem:hover .dropdown {
+  display: block; /* Hiển thị menu khi hover */
 }
