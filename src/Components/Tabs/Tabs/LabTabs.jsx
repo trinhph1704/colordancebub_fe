@@ -9,6 +9,7 @@ import useAuth from "../../../hooks/useAuth";
 import api from "../../utils/requestAPI";
 import { toast } from "react-toastify";
 import OrderCard from "../../Items/Card/OrderCard";
+import OrderHistory from "../../Items/Table/OrderHistory"
 
 export default function LabTabs() {
   const [value, setValue] = useState("1");
@@ -29,7 +30,7 @@ export default function LabTabs() {
         `https://cldhbe.azurewebsites.net/Get-All-Order-Success-By-AccounId?accountId=${accountid}`
       );
       const orders = response.data.$values || [];
-      console.log(orders)
+      console.log(orders);
       setOrderSuccess(orders);
     } catch (error) {
       toast.error("Error fetching orders data: " + error.message);
@@ -56,7 +57,10 @@ export default function LabTabs() {
             <Tab label="Đơn Hàng" value="2" />
           </TabList>
         </Box>
-        <TabPanel value="1">Lịch Sử</TabPanel>
+        <TabPanel value="1">
+        <OrderHistory/>
+        </TabPanel>
+
         <TabPanel value="2">
           {loading ? (
             <p>Loading...</p>
